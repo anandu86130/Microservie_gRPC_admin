@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.27.3
-// source: pb/product.proto
+// source: product.proto
 
 package __
 
@@ -19,10 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProductService_CreateProduct_FullMethodName    = "/pbP.ProductService/CreateProduct"
-	ProductService_FetchByProductID_FullMethodName = "/pbP.ProductService/FetchByProductID"
-	ProductService_FetchByName_FullMethodName      = "/pbP.ProductService/FetchByName"
-	ProductService_FetchProducts_FullMethodName    = "/pbP.ProductService/FetchProducts"
+	ProductService_CreateProduct_FullMethodName      = "/pbP.ProductService/CreateProduct"
+	ProductService_FetchProductByID_FullMethodName   = "/pbP.ProductService/FetchProductByID"
+	ProductService_FetchProductByName_FullMethodName = "/pbP.ProductService/FetchProductByName"
+	ProductService_FetchProducts_FullMethodName      = "/pbP.ProductService/FetchProducts"
 )
 
 // ProductServiceClient is the client API for ProductService service.
@@ -30,8 +30,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductServiceClient interface {
 	CreateProduct(ctx context.Context, in *ProductDetails, opts ...grpc.CallOption) (*ProductResponse, error)
-	FetchByProductID(ctx context.Context, in *ProductID, opts ...grpc.CallOption) (*ProductDetails, error)
-	FetchByName(ctx context.Context, in *ProductByName, opts ...grpc.CallOption) (*ProductDetails, error)
+	FetchProductByID(ctx context.Context, in *ProductID, opts ...grpc.CallOption) (*ProductDetails, error)
+	FetchProductByName(ctx context.Context, in *ProductByName, opts ...grpc.CallOption) (*ProductDetails, error)
 	FetchProducts(ctx context.Context, in *NoParam, opts ...grpc.CallOption) (*ProductList, error)
 }
 
@@ -53,20 +53,20 @@ func (c *productServiceClient) CreateProduct(ctx context.Context, in *ProductDet
 	return out, nil
 }
 
-func (c *productServiceClient) FetchByProductID(ctx context.Context, in *ProductID, opts ...grpc.CallOption) (*ProductDetails, error) {
+func (c *productServiceClient) FetchProductByID(ctx context.Context, in *ProductID, opts ...grpc.CallOption) (*ProductDetails, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ProductDetails)
-	err := c.cc.Invoke(ctx, ProductService_FetchByProductID_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ProductService_FetchProductByID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *productServiceClient) FetchByName(ctx context.Context, in *ProductByName, opts ...grpc.CallOption) (*ProductDetails, error) {
+func (c *productServiceClient) FetchProductByName(ctx context.Context, in *ProductByName, opts ...grpc.CallOption) (*ProductDetails, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ProductDetails)
-	err := c.cc.Invoke(ctx, ProductService_FetchByName_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ProductService_FetchProductByName_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -88,8 +88,8 @@ func (c *productServiceClient) FetchProducts(ctx context.Context, in *NoParam, o
 // for forward compatibility.
 type ProductServiceServer interface {
 	CreateProduct(context.Context, *ProductDetails) (*ProductResponse, error)
-	FetchByProductID(context.Context, *ProductID) (*ProductDetails, error)
-	FetchByName(context.Context, *ProductByName) (*ProductDetails, error)
+	FetchProductByID(context.Context, *ProductID) (*ProductDetails, error)
+	FetchProductByName(context.Context, *ProductByName) (*ProductDetails, error)
 	FetchProducts(context.Context, *NoParam) (*ProductList, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
@@ -104,11 +104,11 @@ type UnimplementedProductServiceServer struct{}
 func (UnimplementedProductServiceServer) CreateProduct(context.Context, *ProductDetails) (*ProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProduct not implemented")
 }
-func (UnimplementedProductServiceServer) FetchByProductID(context.Context, *ProductID) (*ProductDetails, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FetchByProductID not implemented")
+func (UnimplementedProductServiceServer) FetchProductByID(context.Context, *ProductID) (*ProductDetails, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FetchProductByID not implemented")
 }
-func (UnimplementedProductServiceServer) FetchByName(context.Context, *ProductByName) (*ProductDetails, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FetchByName not implemented")
+func (UnimplementedProductServiceServer) FetchProductByName(context.Context, *ProductByName) (*ProductDetails, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FetchProductByName not implemented")
 }
 func (UnimplementedProductServiceServer) FetchProducts(context.Context, *NoParam) (*ProductList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FetchProducts not implemented")
@@ -152,38 +152,38 @@ func _ProductService_CreateProduct_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProductService_FetchByProductID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductService_FetchProductByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProductServiceServer).FetchByProductID(ctx, in)
+		return srv.(ProductServiceServer).FetchProductByID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProductService_FetchByProductID_FullMethodName,
+		FullMethod: ProductService_FetchProductByID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).FetchByProductID(ctx, req.(*ProductID))
+		return srv.(ProductServiceServer).FetchProductByID(ctx, req.(*ProductID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProductService_FetchByName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductService_FetchProductByName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ProductByName)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProductServiceServer).FetchByName(ctx, in)
+		return srv.(ProductServiceServer).FetchProductByName(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProductService_FetchByName_FullMethodName,
+		FullMethod: ProductService_FetchProductByName_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).FetchByName(ctx, req.(*ProductByName))
+		return srv.(ProductServiceServer).FetchProductByName(ctx, req.(*ProductByName))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -218,12 +218,12 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProductService_CreateProduct_Handler,
 		},
 		{
-			MethodName: "FetchByProductID",
-			Handler:    _ProductService_FetchByProductID_Handler,
+			MethodName: "FetchProductByID",
+			Handler:    _ProductService_FetchProductByID_Handler,
 		},
 		{
-			MethodName: "FetchByName",
-			Handler:    _ProductService_FetchByName_Handler,
+			MethodName: "FetchProductByName",
+			Handler:    _ProductService_FetchProductByName_Handler,
 		},
 		{
 			MethodName: "FetchProducts",
@@ -231,5 +231,5 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "pb/product.proto",
+	Metadata: "product.proto",
 }

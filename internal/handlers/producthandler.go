@@ -16,7 +16,7 @@ func (a *AdminHandler) CreateProduct(ctx context.Context, p *pb.AProductDetails)
 	return result, nil
 }
 
-func (a *AdminHandler) FetchByProductID(ctx context.Context, p *pb.AProductById) (*pb.AProductDetails, error) {
+func (a *AdminHandler) FetchProductByID(ctx context.Context, p *pb.AProductByID) (*pb.AProductDetails, error) {
 	result, err := a.AdminService.FetchProductByID(p)
 	if err != nil {
 		log.Println("error while fetching product by id")
@@ -25,7 +25,7 @@ func (a *AdminHandler) FetchByProductID(ctx context.Context, p *pb.AProductById)
 	return result, nil
 }
 
-func (a *AdminHandler) FetchByName(ctx context.Context, p *pb.AProductByName) (*pb.AProductDetails, error) {
+func (a *AdminHandler) FetchProductByName(ctx context.Context, p *pb.AProductByName) (*pb.AProductDetails, error) {
 	result, err := a.AdminService.FetchProductByName(p)
 	if err != nil {
 		log.Println("error while fetching product by name")

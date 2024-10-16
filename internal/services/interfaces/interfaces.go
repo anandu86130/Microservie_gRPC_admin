@@ -7,7 +7,7 @@ import (
 type AdminServiceInter interface{
 	AdminLoginService(p *pb.AdminRequest) (*pb.AdminResponse,error)
 	CreateProduct(p *pb.AProductDetails) (*pb.AdminResponse,error)
-	FetchProductByID(p *pb.AProductById) (*pb.AProductDetails,error)
+	FetchProductByID(p *pb.AProductByID) (*pb.AProductDetails,error)
 	FetchProductByName(p *pb.AProductByName) (*pb.AProductDetails,error)
 	FetchAllProduct(p *pb.AdminNoParam) (*pb.AProductList,error)
 }

@@ -28,10 +28,10 @@ func CreateProductHandler(client productpb.ProductServiceClient, p *adminpb.APro
 	return response, nil
 }
 
-func FetchProductByIDHandler(client productpb.ProductServiceClient, p *adminpb.AProductById) (*productpb.ProductDetails, error) {
+func FetchProductByIDHandler(client productpb.ProductServiceClient, p *adminpb.AProductByID) (*productpb.ProductDetails, error) {
 	ctx := context.Background()
 
-	response, err := client.FetchByProductID(ctx, &productpb.ProductID{Id: p.Id})
+	response, err := client.FetchProductByID(ctx, &productpb.ProductID{Id: p.Id})
 	if err != nil {
 		log.Printf("error while loading product by id")
 		return nil, err
@@ -42,7 +42,7 @@ func FetchProductByIDHandler(client productpb.ProductServiceClient, p *adminpb.A
 func FetchProductByNameHandler(client productpb.ProductServiceClient, p *adminpb.AProductByName) (*productpb.ProductDetails, error) {
 	ctx := context.Background()
 
-	response, err := client.FetchByName(ctx, &productpb.ProductByName{})
+	response, err := client.FetchProductByName(ctx, &productpb.ProductByName{})
 	if err != nil {
 		log.Printf("error while loading productlist")
 		return nil, err

@@ -13,15 +13,15 @@ type AdminHandler struct {
 	pb.AdminServiceServer
 }
 
-func NewAdminHandler(repo interfaces.AdminServiceInter) *AdminHandler{
+func NewAdminHandler(repo interfaces.AdminServiceInter) *AdminHandler {
 	return &AdminHandler{
 		AdminService: repo,
 	}
 }
 
-func (a *AdminHandler) AdminLogin(ctx context.Context, p *pb.AdminRequest) (*pb.AdminResponse, error){
+func (a *AdminHandler) AdminLogin(ctx context.Context, p *pb.AdminRequest) (*pb.AdminResponse, error) {
 	result, err := a.AdminService.AdminLoginService(p)
-	if err != nil{
+	if err != nil {
 		log.Println("error while logging in")
 		return nil, err
 	}

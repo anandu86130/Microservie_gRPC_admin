@@ -40,7 +40,7 @@ func (a *AdminService) FetchAllProduct(p *pb.AdminNoParam) (*pb.AProductList, er
 	}, nil
 }
 
-func (a *AdminService) FetchProductByID(p *pb.AProductById) (*pb.AProductDetails, error) {
+func (a *AdminService) FetchProductByID(p *pb.AProductByID) (*pb.AProductDetails, error) {
 	result, err := productpb.FetchProductByIDHandler(a.client, p)
 	if err != nil {
 		return nil, err

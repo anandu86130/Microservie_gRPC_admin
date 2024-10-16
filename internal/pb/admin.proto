@@ -1,14 +1,14 @@
 syntax = "proto3";
 
-package PbA;
+package pbA;
 
 option go_package = "./";
 
 service AdminService{
     rpc AdminLogin(AdminRequest)returns(AdminResponse);
     rpc CreateProduct(AProductDetails)returns(AdminResponse);
-    rpc FetchByProductID(AProductById)returns(AProductDetails);
-    rpc FetchByName(AProductByName)returns(AProductDetails);
+    rpc FetchProductByID(AProductByID)returns(AProductDetails);
+    rpc FetchProductByName(AProductByName)returns(AProductDetails);
     rpc FetchProducts(AdminNoParam)returns(AProductList);
 }
 
@@ -37,7 +37,7 @@ message AProductDetails{
     uint32 quantity = 8;
 }
 
-message AProductById{
+message AProductByID{
     uint32 id = 1;
 }
 

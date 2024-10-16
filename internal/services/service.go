@@ -33,7 +33,7 @@ func (a *AdminService) AdminLoginService(p *pb.AdminRequest) (*pb.AdminResponse,
 	response := pb.AdminResponse{
 		Status: "Success",
 		Error: "",
-		Message: "Admin Logged in successfully, Token"+token,
+		Message: "Admin Logged in successfully, Token: "+token,
 	}
 	return &response,nil
 } 

@@ -6,8 +6,8 @@ option go_package = "./";
 
 service ProductService{
     rpc CreateProduct(ProductDetails)returns(ProductResponse);
-    rpc FetchByProductID(ProductID)returns(ProductDetails);
-    rpc FetchByName(ProductByName)returns(ProductDetails);
+    rpc FetchProductByID(ProductID)returns(ProductDetails);
+    rpc FetchProductByName(ProductByName)returns(ProductDetails);
     rpc FetchProducts(NoParam)returns(ProductList);
 }
 

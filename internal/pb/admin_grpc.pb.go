@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.27.3
-// source: pb/admin.proto
+// source: admin.proto
 
 package __
 
@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AdminService_AdminLogin_FullMethodName       = "/PbA.AdminService/AdminLogin"
-	AdminService_CreateProduct_FullMethodName    = "/PbA.AdminService/CreateProduct"
-	AdminService_FetchByProductID_FullMethodName = "/PbA.AdminService/FetchByProductID"
-	AdminService_FetchByName_FullMethodName      = "/PbA.AdminService/FetchByName"
-	AdminService_FetchProducts_FullMethodName    = "/PbA.AdminService/FetchProducts"
+	AdminService_AdminLogin_FullMethodName         = "/pbA.AdminService/AdminLogin"
+	AdminService_CreateProduct_FullMethodName      = "/pbA.AdminService/CreateProduct"
+	AdminService_FetchProductByID_FullMethodName   = "/pbA.AdminService/FetchProductByID"
+	AdminService_FetchProductByName_FullMethodName = "/pbA.AdminService/FetchProductByName"
+	AdminService_FetchProducts_FullMethodName      = "/pbA.AdminService/FetchProducts"
 )
 
 // AdminServiceClient is the client API for AdminService service.
@@ -32,8 +32,8 @@ const (
 type AdminServiceClient interface {
 	AdminLogin(ctx context.Context, in *AdminRequest, opts ...grpc.CallOption) (*AdminResponse, error)
 	CreateProduct(ctx context.Context, in *AProductDetails, opts ...grpc.CallOption) (*AdminResponse, error)
-	FetchByProductID(ctx context.Context, in *AProductById, opts ...grpc.CallOption) (*AProductDetails, error)
-	FetchByName(ctx context.Context, in *AProductByName, opts ...grpc.CallOption) (*AProductDetails, error)
+	FetchProductByID(ctx context.Context, in *AProductByID, opts ...grpc.CallOption) (*AProductDetails, error)
+	FetchProductByName(ctx context.Context, in *AProductByName, opts ...grpc.CallOption) (*AProductDetails, error)
 	FetchProducts(ctx context.Context, in *AdminNoParam, opts ...grpc.CallOption) (*AProductList, error)
 }
 
@@ -65,20 +65,20 @@ func (c *adminServiceClient) CreateProduct(ctx context.Context, in *AProductDeta
 	return out, nil
 }
 
-func (c *adminServiceClient) FetchByProductID(ctx context.Context, in *AProductById, opts ...grpc.CallOption) (*AProductDetails, error) {
+func (c *adminServiceClient) FetchProductByID(ctx context.Context, in *AProductByID, opts ...grpc.CallOption) (*AProductDetails, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AProductDetails)
-	err := c.cc.Invoke(ctx, AdminService_FetchByProductID_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AdminService_FetchProductByID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adminServiceClient) FetchByName(ctx context.Context, in *AProductByName, opts ...grpc.CallOption) (*AProductDetails, error) {
+func (c *adminServiceClient) FetchProductByName(ctx context.Context, in *AProductByName, opts ...grpc.CallOption) (*AProductDetails, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AProductDetails)
-	err := c.cc.Invoke(ctx, AdminService_FetchByName_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AdminService_FetchProductByName_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -101,8 +101,8 @@ func (c *adminServiceClient) FetchProducts(ctx context.Context, in *AdminNoParam
 type AdminServiceServer interface {
 	AdminLogin(context.Context, *AdminRequest) (*AdminResponse, error)
 	CreateProduct(context.Context, *AProductDetails) (*AdminResponse, error)
-	FetchByProductID(context.Context, *AProductById) (*AProductDetails, error)
-	FetchByName(context.Context, *AProductByName) (*AProductDetails, error)
+	FetchProductByID(context.Context, *AProductByID) (*AProductDetails, error)
+	FetchProductByName(context.Context, *AProductByName) (*AProductDetails, error)
 	FetchProducts(context.Context, *AdminNoParam) (*AProductList, error)
 	mustEmbedUnimplementedAdminServiceServer()
 }
@@ -120,11 +120,11 @@ func (UnimplementedAdminServiceServer) AdminLogin(context.Context, *AdminRequest
 func (UnimplementedAdminServiceServer) CreateProduct(context.Context, *AProductDetails) (*AdminResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProduct not implemented")
 }
-func (UnimplementedAdminServiceServer) FetchByProductID(context.Context, *AProductById) (*AProductDetails, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FetchByProductID not implemented")
+func (UnimplementedAdminServiceServer) FetchProductByID(context.Context, *AProductByID) (*AProductDetails, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FetchProductByID not implemented")
 }
-func (UnimplementedAdminServiceServer) FetchByName(context.Context, *AProductByName) (*AProductDetails, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FetchByName not implemented")
+func (UnimplementedAdminServiceServer) FetchProductByName(context.Context, *AProductByName) (*AProductDetails, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FetchProductByName not implemented")
 }
 func (UnimplementedAdminServiceServer) FetchProducts(context.Context, *AdminNoParam) (*AProductList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FetchProducts not implemented")
@@ -186,38 +186,38 @@ func _AdminService_CreateProduct_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AdminService_FetchByProductID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AProductById)
+func _AdminService_FetchProductByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AProductByID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServiceServer).FetchByProductID(ctx, in)
+		return srv.(AdminServiceServer).FetchProductByID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdminService_FetchByProductID_FullMethodName,
+		FullMethod: AdminService_FetchProductByID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServiceServer).FetchByProductID(ctx, req.(*AProductById))
+		return srv.(AdminServiceServer).FetchProductByID(ctx, req.(*AProductByID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AdminService_FetchByName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AdminService_FetchProductByName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AProductByName)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServiceServer).FetchByName(ctx, in)
+		return srv.(AdminServiceServer).FetchProductByName(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdminService_FetchByName_FullMethodName,
+		FullMethod: AdminService_FetchProductByName_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServiceServer).FetchByName(ctx, req.(*AProductByName))
+		return srv.(AdminServiceServer).FetchProductByName(ctx, req.(*AProductByName))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -244,7 +244,7 @@ func _AdminService_FetchProducts_Handler(srv interface{}, ctx context.Context, d
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AdminService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "PbA.AdminService",
+	ServiceName: "pbA.AdminService",
 	HandlerType: (*AdminServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -256,12 +256,12 @@ var AdminService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AdminService_CreateProduct_Handler,
 		},
 		{
-			MethodName: "FetchByProductID",
-			Handler:    _AdminService_FetchByProductID_Handler,
+			MethodName: "FetchProductByID",
+			Handler:    _AdminService_FetchProductByID_Handler,
 		},
 		{
-			MethodName: "FetchByName",
-			Handler:    _AdminService_FetchByName_Handler,
+			MethodName: "FetchProductByName",
+			Handler:    _AdminService_FetchProductByName_Handler,
 		},
 		{
 			MethodName: "FetchProducts",
@@ -269,5 +269,5 @@ var AdminService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "pb/admin.proto",
+	Metadata: "admin.proto",
 }
